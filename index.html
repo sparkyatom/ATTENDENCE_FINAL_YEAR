@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Attendance</title>
+</head>
+<body>
+    <h1>Face Recognition Attendance System</h1>
+    
+    <video id="video" autoplay></video>
+    <br>
+    <button onclick="captureFace()">Mark Attendance</button>
+    <p id="status">Waiting for attendance...</p>
+
+    <script>
+        const socket = io("http://127.0.0.1:5000"); // Connect to WebSocket backend
+
+        // Start Webcam
+        const video = document.getElementById("video");
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => { video.srcObject = stream; })
+            .catch(error => console.error("Error accessing webcam:", error));
+
+        function captureFace() {
+            const canvas = document.createElement("canvas");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imageData = canvas.toDataURL("image/jpeg").split(",")[1]; // Convert to Base64
+            socket.emit("send_face", { image: imageData }); // Send image to backend
+        }
+
+        socket.on("attendance_status", (data) => {
+            document.getElementById("status").innerText = data.status;
+        });
+    </script>
+
+    <!-- Import Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</body>
+</html>
