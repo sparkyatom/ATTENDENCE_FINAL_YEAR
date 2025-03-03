@@ -1,0 +1,68 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.video-container {
+    position: relative;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    overflow: hidden;
+    min-height: 240px;
+}
+
+#webcam, #recorded-video {
+    max-height: 300px;
+    min-height: 240px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    background-color: #000;
+}
+
+.form-label {
+    font-weight: 500;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #218838);
+    border: none;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007bff, #0069d9);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0069d9, #0056b3);
+}
+
+.alert-info {
+    background-color: #e6f7ff;
+    border-color: #b3e0ff;
+    color: #0066cc;
+}
+
+.img-thumbnail {
+    border-color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .col-md-6 {
+        margin-bottom: 20px;
+    }
+}
